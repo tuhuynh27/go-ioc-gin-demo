@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    ports:
+      - "3306:3306" # Exposing MySQL default port
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Replace with your root password
+      MYSQL_DATABASE: mydatabase # Optional: Pre-create a database
+      MYSQL_USER: myuser # Optional: Create a user
+      MYSQL_PASSWORD: mypassword # Optional: Password for the user
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data
+
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379" # Exposing Redis default port
+    volumes:
+      - redis_data:/data # Persist Redis data
+
+volumes:
+  mysql_data:
+  redis_data:
